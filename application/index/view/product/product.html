@@ -1,0 +1,65 @@
+{extend name="index/base"/}
+{block name="tdk"} 
+{volist name="tdkResult" id="tdk"}
+{volist name="proResult" id="pro"}
+{if $pro.title==null}
+<title>{$tdk.title}</title>
+{else}
+<title>{$pro.title}</title>
+{/if}
+<meta name="description" content="{$pro.description}" />
+{if $pro.keywords==null}
+<meta name="keywords" content="{$tdk.keywords}"/>
+{else}
+<meta name="keywords" content="{$pro.keywords}"/>
+{/if}
+{/volist}
+{/volist}
+{/block}
+{block name="css"} 
+<link rel="stylesheet" href="__CSS__/product.css">
+{/block}
+{block name="content"}
+<!--  面包屑导航  -->
+<section class="container wow flipInX" data-wow-delay=".1s">
+    <ol class="breadcrumb">
+        {volist name="tdkResult" id="tdk"}
+        <li><a href="/{$tdk.href}.html">{$tdk.name}</a></li>
+        {/volist}
+        {volist name="proResult" id="pro"}
+        <li class="active">{$pro.name}</li>
+        {/volist}
+    </ol>
+</section>
+<!--  内容  -->
+<section class="product">
+    <div class="container">
+        <!--  左侧产品拦  -->
+        <div class="product-left col-lg-9 col-md-9 col-sm-12 col-xs-12">
+            <div class="product-list-title">
+                <ul class="list-unstyled clearfix nav nav-pills ">
+                    <li class="active"><a href="##">全部</a></li>
+                    {volist name="mainResult" id="main"}
+                    <li><a href="/battery/{$main.id}.html">{$main.name}</a></li>
+                    {/volist}
+                </ul>
+            </div>
+            <div class="row">
+                {volist name="productResult" id="product"}
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="item">
+                            <a href="/product2/{$product.id}.html" class="product-list-imgs"><img src="{$product.img}" alt=""></a>
+                            <h4 class="product-title"><a href="/product2/{$product.id}.html">{$product.name}</a></h4>
+                            <p>{$product.editorValue|htmlspecialchars_decode|strip_tags}</p>
+                        </div>
+                    </div>
+                {/volist}
+            </div>
+            <div class="page text-center">
+                {$page}
+            </div>
+        </div>
+      {include file="index/right" /}
+    </div>
+</section>
+{/block}

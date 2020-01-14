@@ -1,0 +1,26 @@
+{extend name="template/base" /}
+{block name="content"}
+<link rel="stylesheet" type="text/css" href="__LIB__/dist/css/wangEditor.css">
+<div class="page-container">
+    <div class="form form-horizontal">
+        <div class="row cl">
+            <label class="form-label col-xs-3 col-sm-3" style="margin-top: 60px;"><span class="c-red">*</span>编辑器：</label>
+            <div class="formControls col-xs-6 col-sm-6">
+                <div class="container" style=" width: 100%; margin: 60px auto; position: relative;">
+                    <textarea id="editor-trigger" style="display:none; height: 300px;  max-height: 500px;">
+                        <p>请输入内容...</p>
+                    </textarea>
+                </div>
+            </div>
+            <div class="col-xs-3 col-sm-3"></div>
+        </div>
+    </div>
+    <div id="markdown" class="mt-20"></div>
+</div>
+{/block}
+{block name="style"}
+{/block}
+{block name="script"}
+<script type="text/javascript" src="__LIB__/dist/js/wangEditor.js"></script>
+<script type="text/javascript" src="__LIB__/dist/js/menu.js"></script>
+{/block}

@@ -1,0 +1,10 @@
+ .delte{
+  color: red;
+  display: inline-block;
+  font-size: 30px; 
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  left: 35px;
+  top: -6px;
+}

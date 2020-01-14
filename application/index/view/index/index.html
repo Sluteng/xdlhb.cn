@@ -1,0 +1,225 @@
+{extend name="index/base"/}
+{block name="banner"}
+<!--  轮播图  -->
+<section id="myCarousel" class="carousel slide wow fadeInRight" data-wow-delay=".1s">
+    <!--设置轮播器区域样式，设置轮播器滚动样式-->
+    <ol class="carousel-indicators">    <!--设置轮播器列表区域样式，就是小圆点区域样式-->
+        {volist name="bannerResult" id="banner"}
+        <li data-target="#myCarousel" data-slide-to="0" class="{if $key==0}active{/if}"></li>
+        {/volist}
+    </ol>
+    <div class="carousel-inner">                                    <!--设置轮播器图片区域-->
+        {volist name="bannerResult" id="banner"}
+        <div class="item {if $key==0}active tp1{/if} {if $key==1} tp2{/if} {if $key==2} tp3{/if}">   <!--设置轮播器图片样式-->
+            <a href="#"><img src="{$banner.img}" alt="{$banner.title}"></a>
+        </div>
+        {/volist}
+    </div>
+    <!--设置轮播器箭头区域-->
+    <a href="#myCarousel" data-slide="prev" class="carousel-control left">
+     <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a href="#myCarousel" data-slide="next" class="carousel-control right">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</section>
+{/block}
+{block name="content"}
+<!--  产品中心  -->
+<section class="container section">
+    <div class="product-list">
+        <div class="left-menu col-xs-12 col-sm-3 wow fadeInLeft" data-wow-delay=".1s">
+            <h2 class="hidden-xs">产品分类</h2>
+            <ul class="list-unstyled clearfix directory">
+                {volist name="mainResult" id="main"}
+                <li class="{if $key==0}act{/if}">
+                    <div class="link">
+                        <span class="hidden-xs">{$main.name}</span><a href="/battery/{$main.id}.html" class="visible-xs">{$main.name}</a><i class="glyphicon glyphicon-chevron-up hidden-xs"></i>
+                    </div>
+                    <ul class="submenu list-unstyled hidden-xs" style="{if $key==0}display: block;{/if}">
+                        {volist name="viceResult" id="vice"}
+                        {if $main.name==$vice.titles}
+                        <li><a href="/battery1/{$vice.id}.html">{$vice.name}</a></li>
+                        {/if}
+                        {/volist}
+                    </ul>
+                </li>
+                {/volist}
+            </ul>
+        </div>
+        <div class="product-list-imgs col-xs-12 col-sm-9 wow fadeInRightBig" data-wow-delay=".1s">
+            <ul class="list-unstyled">
+                {volist name="productResult" id="product"}
+                   <li class="col-xs-6 col-sm-4 goods_detail">
+                       <div class="box">
+                           <div class="img">
+                               <a href="/product2/{$product.id}.html" title="{$product.titles}"><img src="{$product.img}" alt="{$product.titles}" title=""></a>
+                           </div>
+                           <div class="text" style="-webkit-box-orient: vertical;">
+                               <h4 class="img-title text-center"><a href="/product2/{$product.id}.html">{$product.titles}</a></h4>
+                                <p class="img-content text-center"> 
+                                    <a href="/product2/{$product.id}.html">
+                                        {$product.editorValue|htmlspecialchars_decode|strip_tags}
+                                    </a>
+                               </p>
+                           </div>
+                       </div>
+                   </li>
+                {/volist}
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- 案例展示 -->
+<section class="case section wow bounceInUp" data-wow-delay=".1s">
+    <div class="title">
+        <h2 class="text-center h-h2">案例中心</h2>
+    </div>
+    <div class="container">
+        <ul class="list-unstyled clearfix ">
+            {volist name="casesResult" id="cases"}
+            <li class="col-xs-6 col-lg-4">
+                <div class="case-list" style="background-color:#000;">
+                    <a href="/casea/{$cases.id}.html" style="overflow: hidden">
+                        <img  alt="{$cases.name}" src="{$cases.img}">
+                    </a>
+                    <a href="/casea/{$cases.id}.html" class="case-list-info">
+                        <h3>{$cases.name} </h3>
+                        <p>{$cases.editorValue|htmlspecialchars_decode|strip_tags}</p>
+                    </a>
+                </div>
+            </li>
+            {/volist}
+        </ul>
+        <a href="/cases.html" class="more">查看更多</a>
+    </div>
+</section>
+<!--  关于我们  -->
+<section class="about section clearfix container ">
+    {volist name="weResult" id="we"}
+    <h2 class="h-h2" style="text-align:center;">{$we.titles}</h2>
+    <div class="about-img col-xs-12 col-md-6 col-lg-6 wow fadeInLeft"  data-wow-delay=".1s">
+        <img src="{$we.img}" alt="" title="河北保定鑫动力有限责任公司" class="img-thumbnail">
+    </div>
+
+    <div class="about-content col-xs-12 col-md-6 col-lg-6 wow fadeInRight" data-wow-delay=".1s" style="marign-top:30px;">
+        <div class="title" style="padding-top:30px;">
+              {$we.editorValue|htmlspecialchars_decode}
+        </div>
+    </div>
+    {/volist}
+</section>
+<!--  我们的优势  -->
+<section class="advantage">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6 col-sm-offset-2 col-sm-8 col-xs-12 m1top text-center wow jackInTheBox" data-wow-delay=".3s">
+                <div>
+                    <p>选择我们，只因更专业</p>
+                    <span>Better quality sales champion</span>
+                </div>
+            </div>
+            <div class="m1 col-md-12 col-sm-12 col-xs-12 m11 wow rotateInDownLeft" data-wow-delay=".2s">
+                {volist name="majorResult" id="major"}
+                {if $key==0}
+                <div class=" col-md-8 col-sm-8 col-xs-12">
+                    <div class="col-md-2 col-sm-2 col-xs-2 text-center m11r">
+                        <h3>0{$major.id}</h3>
+                    </div> 
+                    <div class="col-md-10 col-sm-10 col-xs-10 m11r">
+                         <span>{$major.titles}</span>  
+                    </div>
+                  <div class="col-md-10 col-sm-10 col-xs-10 m11r2">
+                        {$major.content|htmlspecialchars_decode}
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 hidden-xs">
+                    <img src="{$major.img}" height="253">
+                </div>
+                {/if}
+                {/volist}
+            </div>
+            <div class="m12 col-md-12 col-sm-12 col-xs-12 wow rotateInDownRight" data-wow-delay=".2s">
+                {volist name="majorResult" id="major"}
+                {if $key==1}
+                <div class="col-md-3 col-sm-3 hidden-xs">
+                    <img src="{$major.img}">
+                </div>
+                <div class="col-md-offset-1 col-md-8 col-sm-offset-1 col-sm-8 col-xs-12 m12r">
+                    <div class="col-md-2 col-sm-2 col-xs-2 text-center m11r">
+                        <h3>0{$major.id}</h3>
+                    </div>
+                    <div class="col-md-10 col-sm-10 col-xs-10 m11r">
+                        <span>{$major.titles}</span>
+                    </div>
+                  <div class="col-md-10 col-sm-10 col-xs-10 m11r2">
+                        {$major.content|htmlspecialchars_decode}
+                    </div>
+                </div>
+                {/if}
+                {/volist}
+            </div>
+            <div class="m11 col-md-12 col-sm-12 col-xs-12 wow rotateInDownLeft" data-wow-delay=".2s">
+                {volist name="majorResult" id="major"}
+                {if $key==2}
+                <div class=" col-md-8 col-sm-8 col-xs-12 m11r">
+                    <div class="col-md-2 col-sm-2 col-xs-2 text-center">
+                        <h3>0{$major.id}</h3>
+                    </div>
+                    <div class="col-md-10 col-sm-10 col-xs-10 m11r">
+                        <span>{$major.titles}</span>
+                    </div>
+                    <div class="col-md-10 col-sm-10 col-xs-10 m11r2">
+                        {$major.content|htmlspecialchars_decode}
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 hidden-xs">
+                    <img src="{$major.img}">
+                </div>
+                {/if}
+                {/volist}
+            </div>
+        </div>
+    </div>
+</section>
+<!--  新闻中心  -->
+<section class="news">
+    <div class="container">
+        <div class="title wow bounceIn" data-wow-delay=".2s">
+            <h2 class="text-center h-h2">新闻中心</h2>
+        </div>
+        <div class="row">
+            <div class="news-left col-lg-5 col-md-6 col-xs-12 col-sm-12 wow bounceInLeft" data-wow-delay=".2s">
+                <ul class="list-unstyled">
+                    {volist name="newsaResult" id="newsa"}
+                    {if $key<=2}
+                    <li>
+                        <h4 class="news-head">
+                            <span class="datetime">{$newsa.update_time|date="Y-m-d",###}</span>
+                            <a href="/newsc/{$newsa.id}.html" title="">{$newsa.name}</a>
+                        </h4>
+                        <p>{$newsa.editorValue|htmlspecialchars_decode|strip_tags}</p>
+                    </li>
+                    {/if}
+                    {/volist}
+                </ul>
+            </div>
+            <div class="news-right col-lg-5 col-lg-offset-2 col-md-6 col-xs-12 col-sm-12 hidden-xs wow bounceInRight" data-wow-delay=".2s">
+                <ul class="list-unstyled">
+                    {volist name="newsaResult" id="newsa"}
+                    {if $key>=3}
+                    <li>
+                        <h4 class="news-head">
+                            <span class="datetime">{$newsa.update_time|date="Y-m-d",###}</span>
+                            <a href="/newsc/{$newsa.id}.html" title="">{$newsa.name}</a>
+                        </h4>
+                        <p>{$newsa.editorValue|htmlspecialchars_decode|strip_tags}</p>
+                    </li>
+                    {/if}
+                    {/volist}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{/block}

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+     {block name="tdk"} 
+     {volist name="tdkResult" id="tdk"}
+     <title>{$tdk.title}</title>
+     <meta name="description" content="{$tdk.description}" />
+     <meta name="keywords" content="{$tdk.keywords}" />
+     {/volist}
+     {/block}
+    <meta name="author" content="畅行网络">
+    <link rel="Bookmark" href="__ROOT__/favicon.ico" >
+    <link rel="Shortcut Icon" href="__ROOT__/favicon.ico" />
+    <link rel="stylesheet" href="__CSS__/bootstrap.css">
+    <link rel="stylesheet" href="__CSS__/common.css">
+    {block name="css"}<link rel="stylesheet" href="__CSS__/index.css">{/block}
+    <link rel="stylesheet" href="__CSS__/iconfont.css">
+    <link rel="stylesheet" href="__CSS__/animate.css">
+    <script src="__JS__/jquery-3.4.1.js"></script>
+    <script src="__JS__/bootstrap.min.js"></script>
+    <script src="__JS__/main.js"></script>
+    <script src="__JS__/wow.min.js"></script>
+        <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Z9IqUxUZE6aiNhtCEx5xIUlipaOzziOD"></script>
+        <style>
+            .anchorBL{
+                display:none;
+            }
+        </style>
+        <link rel="stylesheet" type="text/css" href="__STATIC__/css/public.css">
+</head>
+<body>
+<!--  头部  -->
+<header>
+    <div class="header-top hidden-xs wow fadeInDown" data-wow-delay=".1s">
+        <div class="container clearfix">
+            <ul class="inline-list list-unstyled pull-left">
+                {volist name="contactResult" id="contact"}
+                <li><span class="iconfont">&#xe601;</span> {$contact.phone}</li>
+                <li><span class="iconfont">&#xe6f2;</span> {$contact.email}</li>
+                {/volist}
+            </ul>
+             <!-- 搜索框 -->
+            <div class="language pull-right">
+                <p><a href="http://www.xdlhb.cn" style="color: #ff9000;">CN</a><a href="http://www.xdlxny.cn">EN</a></p>
+            </div>
+            <div class="search pull-right" >
+               <form  action="/search.html" enctype="multipart/form-data" method="post">
+                   <input  name="name" type="text"  value='' placeholder="请输入您要搜索的内容" class="form-control" id="name"/>
+                   <button type="submit" class="btn" id="xdl"/></button>
+               </form>
+            </div>
+        </div>
+    </div>
+    <!--  导航  -->
+    <nav class="navbar navbar-default wow fadeInLeft" data-wow-delay=".1s">
+        <div class="container">
+            <div class="navbar-header">
+                {volist name="inforResult" id="infor"}
+                <a href="/index.html" class="navbar-brand hidden-sm"><img src="{$infor.logo}" alt="公司LOGO" class="img-responsive"></a>
+                {/volist}
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    {volist name="navberResult" id="navber"}
+                    <li class="{if $navber.href==$foo}active{/if}"><a href="/{$navber.href}.html">{$navber.name}</a></li>
+                    {/volist}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+{block name="banner"}
+{volist name="xdlResult" id="xdl"}
+<section class="banner wow fadeIn" data-wow-delay=".2s">
+    <img src="{$xdl.img}" alt="{$xdl.title}">
+</section>
+{/volist}
+{/block}
+{block name="content"}{/block}
+<!--  尾部  -->
+<footer class="footer wow fadeInUp" data-wow-delay=".1s">
+    <div class="container">
+        <div class="friendlink">
+            <ul class="list-unstyled clearfix">
+                <li>友情链接：</li>
+                {volist name="linksResult" id="links"}
+                <li><a href="{$links.look_name}">{$links.name}</a></li>
+                {/volist}
+            </ul>
+        </div>
+        <div class="row">
+            {volist name="maintResult" id="maint"}
+            {if $key<=3}
+            <div class="col-lg-2 col-md-3 col-xs-6">
+                <h4 class=""><a href="/battery/{$maint.id}.html">{$maint.name}</a></h4>
+                <ul class="list-unstyled foot-nav">
+                    {volist name="vicetResult" id="vicet"}
+                    {if $maint.name==$vicet.titles}
+                    <li><a href="/battery1/{$vicet.id}.html">{$vicet.name}</a></li>
+                    {/if}
+                    {/volist}
+                </ul>
+            </div>
+            {/if}
+            {/volist}
+            {volist name="inforResult" id="infor"}
+            <div class="contact col-lg-3 col-lg-offset1 text-center">
+                <em class="tel">
+                    <a href="tel:158-3002-9856">{$infor.fax}</a>
+                </em>
+                <p style="margin-bottom: 10px;">24小时热线</p>
+                <a href="##" id="WeChat" class="">
+                    <img src="__IMG__/wx.png" alt="微信">
+                    <div class="wx">
+                        <img src="{$infor.wechat}" alt="微信二维码" width="150" height="150" class="img-thumbnail">
+                    </div>
+                </a>
+                <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={$infor.qq}&site=qq&menu=yes">
+                    <img src="__IMG__/qq.png" alt="在线QQ">
+                </a>
+            </div>
+            {/volist}
+        </div>
+        <div class="copyright text-center">
+            {volist name="copyResult" id="copy"}
+            <p>{$copy.copyright}   版权所有   2008-2019 <a href="http://beian.miit.gov.cn" target="_blank">  {$copy.record}</a></p>
+            <p>Powered by    <a href="{$copy.website_look}">{$copy.website}   </a>  <a href="/admin" target="_blank">©</a>  2008-2019  <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1278276382'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s9.cnzz.com/z_stat.php%3Fid%3D1278276382%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script></p>
+            {/volist}
+        </div>
+    </div>
+</footer>
+     <!-- 右侧导航 -->
+<div class="righty">
+
+     {volist name="inforResult" id="infor" length="1"}
+     <ul class="right_nav">
+        <li>
+        <a href="https://shop599473736.taobao.com/index.htm?spm=2013.1.w5001-22364414312.2.63687657BGaq9U&scene=taobao_shop" target="_blank">
+          <div class="iconBox">
+              <img src='__STATIC__/picture/tb.png'>
+              <h4>我家店铺</h4>
+           </div>
+        </a>
+        <div id="taobao" class="hideBox">
+        <div class="hb" id="pop">
+            <div id="pop_head">
+                <a id="pop_close" title="关闭" onclick="$('#pop').hide();">X</a>
+                <h2 class="xdl">鑫动力淘宝店铺</h2>
+            </div>
+        <div id="pop_content">
+           <a href="https://shop599473736.taobao.com/index.htm?spm=2013.1.w5001-22364414312.2.63687657BGaq9U&scene=taobao_shop" target="_blank"><img src="{$infor.img}" alt="商品"/></a>
+        </div>
+        </div>
+     </div>
+  </li>
+        <li>
+           <div class="iconBox oln_ser"> 
+              <img src='__STATIC__/picture/rnqq.png'>
+              <h4>在线客服</h4>
+           </div>
+           <div class="hideBox">
+              <div class="hb">
+                 <h5>在线咨询</h5>
+                 <div class="qqtalk">
+                    <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={$infor.qq}&site=qq&menu=yes">
+                       <span><img src="__STATIC__/picture/online.png" alt="点击发消息"
+                             title="点击发消息" /></span>
+                       <p>点击发消息</p>
+                    </a>
+                 </div>
+              </div>
+           </div>
+        </li>
+        <li>
+           <div class="iconBox phe_num">
+              <img src='__STATIC__/picture/rncall.png'>
+              <h4>联系电话</h4>
+           </div>
+           <div class="hideBox" id="telr">
+              <div class="hb">
+                 <h5>热线电话</h5>
+                 <p><a href="tel:{$infor.fax}">{$infor.fax}</a></p>
+              </div>
+           </div>
+        </li>
+        <li>
+          <a href="/message.html">
+           <div class="iconBox to_msg">
+              <img src='__STATIC__/picture/rnmsg.png'>
+              <h4>在线留言</h4>
+           </div>
+         </a>
+        </li>
+        <li>
+           <div class="iconBox top">
+              <img src='__STATIC__/picture/rntop.png'>
+              <h4>回到顶部</h4>
+           </div>
+        </li>
+     </ul>
+     {/volist}
+      <script type="text/javascript" src="http://www.sucaiq.com/Public/js/other/jquery.js"></script>
+     <script src="__STATIC__/js/jquery.1.11.3.min.js"></script>
+     <script type="text/javascript" src='__STATIC__/js/rightask.js'></script>
+</div>
+<script type="text/javascript">
+  $(function () {
+      $('#xdl').click(function () {
+          var name=$('#name').val();
+          if(name ==  null || name == ''){
+              alert("请输入您要搜索的内容");
+              return false;
+          };
+      })
+  })
+</script>
+<script type="text/javascript">
+  $(function () {
+      $('#searchsubmit').click(function () {
+          var name=$('#s').val();
+          if(name ==  null || name == ''){
+              alert("请输入关键字");
+              return false;
+          };
+      })
+  })
+</script>
+{block name="JS"}{/block}
+</body>
+</html>

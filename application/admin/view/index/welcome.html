@@ -1,0 +1,93 @@
+﻿{extend name="template/base" /}
+{block name="title"}我的桌面{/block}
+{block name="content"}
+<div class="page-container">
+    <p class="f-20 text-success">欢迎使用 {$Think.config.site.name} <span class="f-14">{$Think.config.site.version}</span> 后台管理系统！</p>
+    <p>登录次数：{$info.login_count} </p>
+    {if condition="session('last_login_time')"}
+    <p>上次登录IP：{$last_login_ip} &nbsp;&nbsp;&nbsp; 上次登录时间：{$Think.session.last_login_time|date='Y-m-d H:i:s',###} &nbsp;&nbsp;&nbsp; 上次登录地点：{$last_login_loc}</p>
+    {/if}
+    <p>本次登录IP：{$current_login_ip} &nbsp;&nbsp;&nbsp; 本次登录时间：{$info.last_login_time|date='Y-m-d H:i:s',###} &nbsp;&nbsp;&nbsp; 本次登录地点：{$current_login_loc}</p>
+</div>
+<div class="page-container">
+<div id="container" style="max-width:800px;height:400px"></div>
+<script type="text/javascript" src="__ADD__/js/echarts.js"></script>
+</div>
+<footer class="footer mt-20">
+    <div class="container">
+        <p>
+            Copyright &copy;2016 {$Think.config.site.name} {$Think.config.site.version} All Rights Reserved.</p>
+     </div>
+</footer>
+<script type="text/javascript">
+      var dom = document.getElementById("container");
+      var myChart = echarts.init(dom);
+      var app = {};
+      option = null;
+      option = {
+          title: {
+              text: '后台登录/操作统计折线图'
+          },
+          tooltip: {
+              trigger: 'axis'
+          },
+          legend: {
+              data:['登录次数','操作频率']
+          },
+          grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '3%',
+              containLabel: true
+          },
+          toolbox: {
+              feature: {
+                  saveAsImage: {}
+              }
+          },
+          xAxis: {
+              type: 'category',
+              boundaryGap: false,
+              data: [{$times}]
+          },
+          yAxis: {
+              type: 'value',
+          },
+          series: [
+              {
+                  name:'登录次数',
+                  type:'line',
+                  stack: '总量',
+                  data:[{$nums}]
+              },
+              {
+                  name:'操作频率',
+                  type:'line',
+                  stack: '总量',
+                  data:[{$titles}]
+              },
+              // {
+              //     name:'视频广告',
+              //     type:'line',
+              //     stack: '总量',
+              //     data:[150, 232, 201, 154, 190, 330, 410]
+              // },
+              // {
+              //     name:'直接访问',
+              //     type:'line',
+              //     stack: '总量',
+              //     data:[320, 332, 301, 334, 390, 330, 320]
+              // },
+              // {
+              //     name:'搜索引擎',
+              //     type:'line',
+              //     stack: '总量',
+              //     data:[820, 932, 901, 934, 1290, 1330, 1320]
+              // }
+          ]
+      };
+
+          myChart.setOption(option, true);
+
+</script>
+{/block}

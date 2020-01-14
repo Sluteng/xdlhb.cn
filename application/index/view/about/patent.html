@@ -1,0 +1,99 @@
+{extend name="index/base"/}
+{block name="tdk"} 
+{volist name="tdkResult" id="tdk"}
+{volist name="tdkzResult" id="tdkz"}
+{if $tdkz.title==null}
+<title>{$tdk.title}</title>
+{else}
+<title>{$tdkz.title}</title>
+{/if}
+<meta name="description" content="{$tdkz.description}" />
+{if $tdkz.keywords==null}
+<meta name="keywords" content="{$tdk.keywords}"/>
+{else}
+<meta name="keywords" content="{$tdkz.keywords}"/>
+{/if}
+{/volist}
+{/volist}
+{/block}
+{block name="css"} 
+<link rel="stylesheet" href="__CSS__/about.css">
+<script src="__JS__/jquery-3.4.1.js"></script>
+<script src="__JS__/bootstrap.min.js"></script>
+<script src="__JS__/main.js"></script>
+<script src="__JS__/wow.min.js"></script>
+{/block}
+{block name="content"}
+<!--  面包屑导航  -->
+<section class="container wow fadeInLeft" data-wow-delay=".1s">
+    <ol class="breadcrumb">
+        {volist name="tdkResult" id="tdk"}
+        <li><a href="/{$tdk.href}.html">{$tdk.name}</a></li>
+        {/volist}
+        {volist name="aboutpResult" id="aboutp"}
+        <li class="active"><a href="/{$aboutp.href}.html">{$aboutp.name}</a></li>
+        {/volist}
+        {volist name="patentResult" id="patent"}
+        <li class="active">{$patent.titles}</li>
+        {/volist}
+    </ol>
+</section>
+<!--  内容  -->
+<section class="main">
+    <div class="container">
+        <div class="row">
+            <!-- 选项卡菜单-->
+            <div class="left-main col-lg-9 wow bounceInLeft" data-wow-delay=".1s">
+                <div class="text-center left-main-top">
+                    <ul id="myTab" class="nav nav-pills text-center" role="tablist">
+                        {volist name="briefResult" id="brief"}
+                        <li><a href="/about.html" role="tab">{$brief.titles}</a></li>
+                        {/volist}
+                        {volist name="patentResult" id="patent"}
+                        <li class="active"><a href="/patent.html" role="tab">{$patent.titles}</a></li>
+                        {/volist}
+                        {volist name="workshopResult" id="workshop"}
+                        <li><a href="/workshop.html" role="tab">{$workshop.titles}</a></li>
+                        {/volist}
+                    </ul>
+                </div>
+                <!-- 选项卡面板 -->
+                <div id="myTabContent" class="tab-content">
+                        <div class="patent">
+                            <ul class="list-unstyled clearfix">
+                                {volist name="patent1Result" id="patent1"}
+                                <li class="col-lg-4 col-md-6 col-xs-12 col-sm-6">
+                                    <a class="amplifyImg"><img src="{$patent1.img}" alt="{$patent1.titles}"></a>
+                                </li>
+                                {/volist}
+                            </ul>
+                            <div class="page text-center">
+                            {$page}
+                            </div>
+                            <div class="over"></div>
+                        </div>
+                </div>
+            </div>
+         {include file="index/right" /}
+        </div>
+    </div>
+</section>
+{/block}
+{block name="JS"} 
+<script>
+    $(function () {
+        $('#myTab li').click(function() {
+            var i = $(this).index(); //下标第一种写法
+            //var i = $('tit').index(this);//下标第二种写法
+            $(this).addClass('active').siblings().removeClass('active');
+            $('#myTabContent>div').eq(i).show().siblings().hide();
+        });
+        var url =location.href;         //获取url
+        var typeNum=url.split('?')[1].split("=")[1];     //截取链接后type的值
+        $.each($('#myTab li'),function (i) {
+            $('#myTab li').eq(typeNum-1).addClass('active').siblings().removeClass('active');    //B页面tab选中样式
+            $('#myTabContent>div').eq(typeNum-1).show().siblings().hide();  //B页面tab对应内容选中样式
+        });
+    });
+</script>
+{/block}

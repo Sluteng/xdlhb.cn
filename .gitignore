@@ -1,0 +1,4 @@
+.idea
+runtime/*
+public/uploads/*
+public/ueditor/*

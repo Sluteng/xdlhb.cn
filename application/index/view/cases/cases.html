@@ -1,0 +1,60 @@
+{extend name="index/base"/}
+{block name="tdk"} 
+{volist name="tdkResult" id="tdk"}
+{volist name="caseResult" id="case"}
+{if $case.title==null}
+<title>{$tdk.title}</title>
+{else}
+<title>{$case.title}</title>
+{/if}
+<meta name="description" content="{$case.description}" />
+{if $case.keywords==null}
+<meta name="keywords" content="{$tdk.keywords}"/>
+{else}
+<meta name="keywords" content="{$case.keywords}"/>
+{/if}
+{/volist}
+{/volist}
+{/block}
+{block name="css"} 
+<link rel="stylesheet" href="__CSS__/case.css">
+{/block}
+{block name="content"}
+<!--  面包屑导航  -->
+<section class="container wow flipInX" data-wow-delay=".1s">
+    <ol class="breadcrumb">
+        {volist name="tdkResult" id="tdk"}
+        <li><a href="/{$tdk.href}.html">{$tdk.name}</a></li>
+        {/volist}
+        {volist name="caseResult" id="case"}
+        <li class="active">{$case.name}</li>
+        {/volist}
+    </ol>
+</section>
+<!--  内容  -->
+<section class="case container">
+    <div class="row">
+        <div class="left-case col-lg-9">
+            <ul class="list-unstyled case-list clearfix">
+                {volist name="casesResult" id="cases"}
+                <li class="col-lg-4 col-sm-6">
+                    <div class="card">
+                        <a href="/casea/{$cases.id}.html">
+                            <img src="{$cases.img}" alt="{$cases.name}">
+                            <div class="card-hover text-center">
+                                <h3>{$cases.name}</h3>
+                                <p>{$cases.editorValue|htmlspecialchars_decode|strip_tags}</p>
+                            </div>
+                        </a>
+                    </div>
+                </li>
+                {/volist}
+            </ul>
+            <div class="page text-center">
+               {$page}
+            </div>
+        </div>
+       {include file="index/right" /}
+    </div>
+</section>
+{/block}

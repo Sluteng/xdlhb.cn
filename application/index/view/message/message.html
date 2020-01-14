@@ -1,0 +1,105 @@
+{extend name="index/base"/}
+{block name="tdk"} 
+{volist name="tdkResult" id="tdk"}
+{volist name="messResult" id="mess"}
+{if $mess.title==null}
+<title>{$tdk.title}</title>
+{else}
+<title>{$mess.title}</title>
+{/if}
+<meta name="description" content="{$mess.description}" />
+{if $mess.keywords==null}
+<meta name="keywords" content="{$tdk.keywords}"/>
+{else}
+<meta name="keywords" content="{$mess.keywords}"/>
+{/if}
+{/volist}
+{/volist}
+{/block}
+{block name="css"} 
+<link rel="stylesheet" href="__CSS__/message.css">
+{/block}
+{block name="content"}
+<!--  面包屑导航  -->
+<section class="container wow flipInX" data-wow-delay=".1s">
+    <ol class="breadcrumb">
+        {volist name="tdkResult" id="tdk"}
+        <li><a href="/{$tdk.href}.html">{$tdk.name}</a></li>
+        {/volist}
+        {volist name="messResult" id="mess"}
+        <li class="active">{$mess.name}</li>
+        {/volist}
+    </ol>
+</section>
+<!--  内容  -->
+<section class="container" style="margin-bottom: 20px;">
+    <div class="row">
+        <div class="left-content col-lg-9 wow bounceInLeft" data-wow-delay=".2s">
+            <form action="/centers.html"  enctype="multipart/form-data" method="post" id="form">
+                <div class="from-group ">
+                    <label for="">姓名</label>
+                    <input type="text" name="name" class="form-control" placeholder="( 必填 )" id="xm">
+                </div>
+                <div class="from-group">
+                    <label for="">邮箱</label>
+                    <input type="text" name="mailbox" class="form-control">
+                </div>
+                <div class="from-group">
+                    <label for="">电话</label>
+                    <input type="text" name="phone" class="form-control" placeholder="( 必填 )" id="tel">
+                </div>
+                <div class="from-group">
+                    <label for="">留言主题</label>
+                    <input type="text" name='titles' class="form-control">
+                </div>
+                <div class="from-group">
+                    <label for="">留言内容</label><br>
+                    <textarea name='content' id="" cols="30" rows="10" style="width: 70%;-webkit-border-radius: 5px;-moz-border-radius: 5px;border-radius: 5px;"></textarea>
+                </div>
+                <div class="from-group">
+                    <label for="">请输入验证码</label><br>
+                    <input type="text" name="captcha" class="form-control pull-left" placeholder="请输入验证码" id="yzm">
+                    <div class="yzm">
+                        <img id="captcha"  src="{:captcha_src()}" alt="验证码" title="点击刷新验证码" style="cursor:pointer;width: 150px;height: 40px">
+                    </div>
+                </div>
+                <input type="submit" name="submit" value="提 交" class="btn btn-primary" id="check"/>  
+            </form>
+            {if $captcha!=null}
+            {if $captcha=='true'}
+            <script>alert('提交成功');</script>
+            {else}
+            <script>alert('验证码错误');</script>
+            {/if}{/if}
+        </div>
+        <!--  右侧搜索栏  -->
+       {include file="index/right" /}
+    </div>
+</section>
+<script type="text/javascript" src="__LIB__/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__LIB__/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="__LIB__/Validform/5.3.2/Validform.min.js"></script>
+<script>
+    $(function () {
+        $("#captcha").click(function () {
+            $(this).attr("src","{:captcha_src()}?t="+new Date().getTime())
+        });
+        $("#form").Validform({
+            callback:function(ret){
+                if (ret.code){
+                    if (ret.msg == '验证码错误!'){
+                        $("#captcha").click();
+                        $("[name='captcha']").val('');
+                        layer.msg(ret.msg);
+                    } else {
+                        layer.alert(ret.msg);
+                    }
+                } else {
+                    layer.msg("登录成功！");
+                    location.href = '{$Request.get.callback ?: \\think\\Url::build("Index/index")}';
+                }
+            }
+        });
+    })
+</script>
+{/block}

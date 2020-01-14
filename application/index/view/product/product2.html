@@ -1,0 +1,92 @@
+{extend name="index/base"/}
+{block name="tdk"} 
+{volist name="tdkResult" id="tdk"}
+{volist name="productResult" id="product"}
+{if $product.title==null}
+<title>{$tdk.title}</title>
+{else}
+<title>{$product.title}</title>
+{/if}
+<meta name="description" content="{$product.description}" />
+{if $product.keywords==null}
+<meta name="keywords" content="{$tdk.keywords}"/>
+{else}
+<meta name="keywords" content="{$product.keywords}"/>
+{/if}
+{/volist}
+{/volist}
+{/block}
+{block name="css"} 
+<link rel="stylesheet" href="__CSS__/product.css">
+{/block}
+{block name="content"}
+<!--  面包屑导航  -->
+<section class="container wow flipInX" data-wow-delay=".1s">
+    <ol class="breadcrumb">
+        {volist name="tdkResult" id="tdk"}
+        <li><a href="/{$tdk.href}.html">{$tdk.name}</a></li>
+        {/volist}
+        {volist name="proResult" id="pro"}
+        <li class="active"><a href="/{$pro.href}.html">{$pro.name}</a></li>
+        {/volist}
+        {volist name="mainResult" id="main"}
+        <li class="active"><a href="/battery/{$main.id}.html">{$main.name}</a></li>
+        {/volist}
+        {volist name="productResult" id="product"}
+         <li class="active">{$product.name}</li>
+        {/volist}
+    </ol>
+</section>
+<!--  内容  -->
+<section class="news container">
+    <div class="row">
+        <div class="left-content col-lg-9 col-sm-12 col-xs-12">
+            {volist name="productResult" id="product"}
+            <div class="row details">
+                <div class="col-lg-6">
+                    <img src="{$product.img}" alt="" class="img-thumbnail">
+                </div>
+                <div class="col-lg-6 clearfix">
+                    <h2 style="font-size: 24px;">{$product.name}</h2>
+                    {$product.content|htmlspecialchars_decode}
+                    <div class="col-lg-5 text-center online">
+                        <a href="##">在线咨询</a>
+                    </div>
+                    <div class="col-lg-5 col-lg-offset-2 text-center online">
+                        0312-6783109
+                    </div>
+                </div>
+                <div class="clearfix col-lg-12" style="margin-top: 10px;">
+                    <div class="details-title">
+                        <span>详细信息</span>
+                    </div>
+                    <div class="details-content">
+                        <div class="table-responsive">
+                            {$product.editorValue|htmlspecialchars_decode}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/volist}
+            <div class="news-page clearfix">
+                {if $prev==null}
+                <a href="">上一页：<span>没有了</span></a>
+                {else}
+                {volist name="$prev" id="pre"}
+                <a href="/product2/{$pre.id}.html">上一页：<span>{$pre.name}</span></a>
+                {/volist}
+                {/if}
+                {if $next==null}
+                <a href="" class="pull-right">下一页：<span>没有了</span></a>
+                {else}
+                {volist name="$next" id="nex"}
+                <a href="/product2/{$nex.id}.html">下一页：<span>{$nex.name}</span></a>
+                {/volist}
+                {/if}
+            </div>
+        </div>
+        <!--  右侧搜索栏  -->
+        {include file="index/right" /}
+    </div>
+</section>
+{/block}

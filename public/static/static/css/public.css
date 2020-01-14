@@ -1,0 +1,38 @@
+
+/* 通用 */
+.righty ul {list-style: none;}
+.righty a {text-decoration: none;}
+.righty .container{margin:0 auto;width: 1200px;}
+.righty .block{padding: 20px 0;}
+.righty .test{width: 100%;height: 3000px;}
+
+/* 侧边悬浮导航 */
+.righty .right_nav{ right:0; bottom:100px; position:fixed; text-align:left;/*overflow: hidden;*/z-index:999;}
+.righty .right_nav li{background:#0085cd;margin:4px 0;padding: 10px;border-top-left-radius: 4px;border-bottom-left-radius: 4px;cursor:pointer;position:relative; right: -70px;}
+.righty .right_nav li .iconBox{text-align: center;overflow: hidden;display: flex;align-items: center;justify-content: space-between}
+.righty .right_nav li img{width: 30px;height:30px;}
+.righty .right_nav li h4{color: #fff;font-size:14px;margin:2px 0;margin-left: 15px;}
+.righty .right_nav li:hover{background:#cf1322}
+.righty .right_nav li .hideBox{display: none;position: absolute;right:120px;padding:10px;padding-right: 15px; top:-10px;z-index: 999;}
+.righty .right_nav li #taobao{display: block;position: absolute;right:120px;padding:10px;padding-right: 15px; top:-10px;z-index: 999;}
+.righty .right_nav li #telr{width: 220px;}
+.righty .right_nav li .hideBox .hb{border: 1px solid #ccc;background-color: #fff; padding: 10px 20px;border-top: 2px solid #0085cd;border-bottom-left-radius: 4px;border-bottom-right-radius: 4px;}
+.righty .right_nav li .hideBox .hb h5{padding: 5px 0;border-bottom: 2px solid #ccc;color: #0085cd;font-size: 16px;font-weight: 400;display: block;white-space: nowrap;}
+.righty .right_nav li .hideBox .hb p {margin-top: 5px;font-size: 18px;font-weight: 700;}
+.righty .right_nav li .hideBox .hb .qqtalk{margin-top: 10px;}
+.righty .right_nav li .hideBox .hb .qqtalk a{display: flex;align-items: center}
+.righty .right_nav li .hideBox .hb .qqtalk img{width: 25px;height:25px;}
+.righty .right_nav li .hideBox .hb .qqtalk p{font-size: 14px;font-weight: 400;white-space: nowrap;margin-top: -5px;margin-left: 5px;}
+.righty .right_nav li:nth-child(3) .hideBox img{width:140px;height: 140px;margin-top: 10px;}
+
+.righty #pop{background:#fff;width:300px; height:282px;font-size:12px;}
+.righty #pop_head{line-height:32px;background:#f6f0f3;border-bottom:1px solid #e0e0e0;font-size:12px;padding:0 0 0 10px;}
+.righty #pop_head .xdl{text-align: center;font-size:14px;color:#666;line-height:32px;height:32px;
+              margin: 0;}
+.righty #pop_content img{
+              width: 258px;
+              height: 220px;
+              padding-top: 5px;
+            }
+.righty #pop_head #pop_close{position:absolute;right:45px;top:16px; font-size: 14px;}
+.righty #pop_head a#pop_close:hover{color:#f00;cursor:pointer;}

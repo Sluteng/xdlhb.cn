@@ -1,0 +1,74 @@
+{extend name="index/base"/}
+{block name="tdk"} 
+{volist name="tdkResult" id="tdk"}
+{volist name="newsaResult" id="new"}
+{if $new.title==null}
+<title>{$tdk.title}</title>
+{else}
+<title>{$new.title}</title>
+{/if}
+<meta name="description" content="{$new.description}" />
+{if $new.keywords==null}
+<meta name="keywords" content="{$tdk.keywords}"/>
+{else}
+<meta name="keywords" content="{$new.keywords}"/>
+{/if}
+{/volist}
+{/volist}
+{/block}
+{block name="css"} 
+<link rel="stylesheet" href="__CSS__/news.css">
+{/block}
+{block name="content"}
+<!--  面包屑导航  -->
+<section class="container wow flipInX" data-wow-delay=".1s">
+    <ol class="breadcrumb">
+        {volist name="tdkResult" id="tdk"}
+        <li><a href="/{$tdk.href}.html">{$tdk.name}</a></li>
+        {/volist}
+        {volist name="newResult" id="newr"}
+        <li class="active"><a href="../news/news.html">{$newr.name}</a></li>
+        {/volist}
+        {volist name="newsResult" id="news"}
+        <li class="active"><a href="../news/news.html">{$news.name}</a></li>
+        {/volist}
+        {volist name="newsaResult" id="newa"}
+        <li class="active">{$newa.name}</li> 
+        {/volist}
+    </ol>
+</section>
+<!--  内容  -->
+<section class="news container">
+    <div class="row">
+        {volist name="newsaResult" id="newsa"}
+        <div class="left-content col-lg-9">
+            <h1>{$newsa.name}</h1>
+            <div class="info">
+                <span>{$newsa.update_time|date="Y-m-d",###}</span>
+                <span><i class="iconfont">&#xe6ee;</i>{$newsa.num}</span>
+            </div>
+            <div class="editor">
+                {$newsa.editorValue|htmlspecialchars_decode}
+            </div>
+            <div class="news-page clearfix">
+                {if $prev==null}
+                <a href="">上一页：<span>没有了</span></a>
+                {else}
+                {volist name="$prev" id="pre"}
+                <a href="/newsc/{$pre.id}.html">上一页：<span>{$pre.name}</span></a>
+                {/volist}
+                {/if}
+                {if $next==null}
+                <a href="" class="pull-right">下一页：<span>没有了</span></a>
+                {else}
+                {volist name="$next" id="nex"}
+                <a href="/newsc/{$nex.id}.html" class="pull-right">下一页：<span>{$nex.name}</span></a>
+                {/volist}
+                {/if}
+            </div>
+        </div>
+        {/volist}
+          {include file="index/right" /}
+    </div>
+</section>
+{/block}

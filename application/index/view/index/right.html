@@ -1,0 +1,50 @@
+            <!--  右侧搜索栏  -->
+            <div class="right-main col-lg-3 wow fadeInRight col-sm-12 col-xs-12" data-wow-delay=".1s">
+                <aside>
+                    <section class="widget side-search">
+                        <h3 class="title">站内搜索</h3>
+                        <form class="searchform" name="formsearch" action="/search.html" enctype="multipart/form-data" method="post">
+                            <input type="hidden" name="kwtype" value="0">
+                            <div class="sform-div">
+                                    <input  name="name" type="text"  value='' placeholder="输入关键字" id="s"/>
+                                    <input type="submit" id="searchsubmit" value="">
+                            </div>
+                        </form>
+                    </section>
+                    <section class="widget widget-category side-contact">
+                        <h3 class="title">联系我们</h3>
+                        {volist name="contactResult" id="contact"}
+                        <div class="s-contact">
+                            <p>电话：{$contact.phone}</p>
+                            <p>传真：{$contact.fax}</p>
+                            <p>邮箱：{$contact.email}</p>
+                            <p>地址：{$contact.url}</p>
+                        </div>
+                        {/volist}
+                    </section>
+                    <section class="widget side-news">
+                        <h3 class="title">热门新闻</h3>
+                        <div class="tabbed">
+                            <ul class="widget-list list-unstyled">
+                                {volist name="newsrResult" id="newsr"}
+                                <li>
+                                    <figure>
+                                        <a href="/newsc/{$newsr.id}.html">
+                                            <img src="{$newsr.img}" alt="{$newsr.name}">
+                                        </a>
+                                    </figure>
+                                    <div class="sn-wrapper">
+                                        <p class="s-desc">
+                                            <a href="/newsc/{$newsr.id}.html" title="">{$newsr.name}</a>
+                                        </p>
+                                        <span class="comments">
+                                            <i class="iconfont">&#xe60c;</i>{$newsr.update_time|date="Y-m-d",###}
+                                        </span>
+                                    </div>
+                                </li>
+                                {/volist}
+                            </ul>
+                        </div>
+                    </section>
+                </aside>
+            </div>

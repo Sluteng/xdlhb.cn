@@ -1,0 +1,5 @@
+<td><input type="checkbox" name="id[]" value="{$vo.id}"></td>
+<td>{$vo.id}</td>
+<td>{$vo.title|high_light=$Request.param.title}</td>
+<td>{$vo.url|urldecode}</td>
+<td>{$vo.create_time|date="Y年m月d日 H:i:s",###}</td>

@@ -1,0 +1,57 @@
+.left-case li{
+    margin-bottom: 20px;
+}
+.card{
+    width: 100%;
+    height: 240px;
+    position: relative;
+    overflow: hidden;
+}
+.card img{
+    width: 100%;
+    height: 100%;
+}
+.card .card-hover{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,.5);
+    color: #fff;
+    opacity: 0;
+    -webkit-transform: translateY(120px);
+    -moz-transform: translateY(120px);
+    -ms-transform: translateY(120px);
+    -o-transform: translateY(120px);
+    transform: translateY(120px);
+    /*transition: all 0.5s ease-in;*/
+}
+.card:hover .card-hover{
+    opacity: 1;
+    transition: all 0.3s ease-in;
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+}
+.card:hover img{
+    transform: scale(1.1);
+    -webkit-transition:all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    -ms-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+}
+.card .card-hover h3{
+    font-size: 16px;
+    margin: 10px 0;
+    color: #ff9000;
+}
+.card .card-hover p{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-indent: 2em;
+}
